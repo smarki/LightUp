@@ -1,0 +1,327 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.4
+-- Dumped by pg_dump version 9.2.4
+-- Started on 2013-05-08 21:13:43
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 175 (class 3079 OID 11727)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1960 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 169 (class 1259 OID 16406)
+-- Name: games; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE games (
+    created date,
+    last_question_id integer,
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.games OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 16461)
+-- Name: games_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE games_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.games_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1961 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: games_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE games_id_seq OWNED BY games.id;
+
+
+--
+-- TOC entry 170 (class 1259 OID 16411)
+-- Name: questions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE questions (
+    id integer NOT NULL,
+    text character(500),
+    game_id integer,
+    player1_id integer,
+    player2_id integer,
+    player3_id integer,
+    created date,
+    answered boolean DEFAULT false,
+    passed boolean DEFAULT false
+);
+
+
+ALTER TABLE public.questions OWNER TO postgres;
+
+--
+-- TOC entry 168 (class 1259 OID 16395)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE users (
+    joned date,
+    name character(150),
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 16423)
+-- Name: users_games; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE users_games (
+    user_id integer,
+    game_id integer,
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.users_games OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16469)
+-- Name: users_games_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_games_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_games_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1962 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: users_games_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_games_id_seq OWNED BY users_games.id;
+
+
+--
+-- TOC entry 172 (class 1259 OID 16453)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1963 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- TOC entry 1934 (class 2604 OID 16463)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY games ALTER COLUMN id SET DEFAULT nextval('games_id_seq'::regclass);
+
+
+--
+-- TOC entry 1933 (class 2604 OID 16455)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- TOC entry 1937 (class 2604 OID 16471)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users_games ALTER COLUMN id SET DEFAULT nextval('users_games_id_seq'::regclass);
+
+
+--
+-- TOC entry 1947 (class 0 OID 16406)
+-- Dependencies: 169
+-- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY games (created, last_question_id, id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1964 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: games_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('games_id_seq', 1, false);
+
+
+--
+-- TOC entry 1948 (class 0 OID 16411)
+-- Dependencies: 170
+-- Data for Name: questions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY questions (id, text, game_id, player1_id, player2_id, player3_id, created, answered, passed) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1946 (class 0 OID 16395)
+-- Dependencies: 168
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY users (joned, name, id) FROM stdin;
+\N	Stefanos                                                                                                                                              	1
+\N	Petros                                                                                                                                                	2
+\.
+
+
+--
+-- TOC entry 1949 (class 0 OID 16423)
+-- Dependencies: 171
+-- Data for Name: users_games; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY users_games (user_id, game_id, id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1965 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: users_games_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('users_games_id_seq', 1, false);
+
+
+--
+-- TOC entry 1966 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('users_id_seq', 2, true);
+
+
+--
+-- TOC entry 1941 (class 2606 OID 16468)
+-- Name: pk_games_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY games
+    ADD CONSTRAINT pk_games_id PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1943 (class 2606 OID 16419)
+-- Name: pk_id_questions; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY questions
+    ADD CONSTRAINT pk_id_questions PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1939 (class 2606 OID 16460)
+-- Name: pk_id_users; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT pk_id_users PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1944 (class 2606 OID 16475)
+-- Name: fk_games_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users_games
+    ADD CONSTRAINT fk_games_id FOREIGN KEY (game_id) REFERENCES games(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 1945 (class 2606 OID 16480)
+-- Name: fk_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users_games
+    ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- TOC entry 1959 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2013-05-08 21:13:43
+
+--
+-- PostgreSQL database dump complete
+--
+
