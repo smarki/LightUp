@@ -1,10 +1,6 @@
 <?php
 
-
-session_start();
-
-// retrieve session data
-$dbconn = $_SESSION['dbconn'];
+$dbconn = pg_connect("host=localhost port=5432 dbname=pg user=postgres password=alex");
 
 //q_text contains the question text
 $q_text = $_POST['question'];
