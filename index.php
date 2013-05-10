@@ -1,8 +1,6 @@
 <?php
-
-
-
-$dbconn = pg_connect("host=localhost port=5432 dbname=pg user=postgres password=alex");
+define('RemoteAccess',1);
+include '/core/connectors/database.php';
 
 ?>
 

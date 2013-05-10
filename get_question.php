@@ -1,5 +1,6 @@
 <?php
-
+if(!defined('RemoteAccess')){die('Direct access not premitted');}
+include '/core/connectors/database.php';
 $dbconn = pg_connect("host=localhost port=5432 dbname=pg user=postgres password=alex");
 
 //q_text contains the question text
