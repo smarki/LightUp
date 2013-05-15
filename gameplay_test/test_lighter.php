@@ -43,12 +43,12 @@ You have just started a new lighter game!
 <div class="main_container">
 
 	<div class="player_frame">
-		<img class="player_image" id="player1" src="images/Aris.jpg" alt="player1">
+		<img class="player_image" id="player1" src="images/unknown.jpg" alt="player1">
 	</div>
 
 	<div class="interaction">
 		<a id="question_link_1" href="show_question.php">
-			<img class="arrow" id="arrow1" src="images/arrow.jpg" alt="question1">
+			<img class="arrow" id="arrow1" src="images/QuestionMark.jpg" alt="question1">
 		</a>
 	</div>
 
