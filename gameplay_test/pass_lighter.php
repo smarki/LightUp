@@ -1,7 +1,6 @@
 <html>
 <head>
 <title>Lighter app Version 0.0000000001</title>
-<script language="javascript" src="js/jquery.js"></script>
 <style>
 .message {
 	background-color:#e0ffff;
@@ -51,28 +50,20 @@
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
-	width:10%;
 }
 
+.question_form {
+	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	width:470px;
+}
 </style>
-
-<script>
-$(document).ready(function() {
-  $('#continue_game_button').click(function() {
-     var url=$(this).attr('href');
-     $('body').load(url);
-     return false;
-  }); //end click
-			
-}); // end ready
-</script>
-
 </head>
-
-
 <body>
 <div class="message">
-	Alex passed you the lighter and asked you a question!
+	Pass the lighter to a friend and ask your question!
 </div>
 </br></br>
 
@@ -83,17 +74,27 @@ $(document).ready(function() {
 </br>
 
 <div class="main_container">
-	<img class="player_image" id="player1" src="images/unknown.jpg" alt="player1">
-	<img class="arrow" id="arrow1" src="images/QuestionMark.jpg" alt="question1">
-	<img class="player_image" id="player2" src="images/Alex.jpg" alt="player2">
+	<img class="player_image" id="player1" src="images/Alex.jpg" alt="player1">
+	<img class="arrow" id="arrow1" src="images/arrow.jpg" alt="question1">
+	<img class="player_image" id="player2" src="images/Pantelis.jpg" alt="player2">
 	<img class="arrow" id="arrow2" src="images/arrow.jpg" alt="question2">
-	<img class="player_image" id="player3" src="images/Pantelis.jpg" alt="player3">	
+	<img class="player_image" id="player3" src="images/unknown.jpg" alt="player3">	
 </div>
 
 </br>
+</br>
 
- <a href="pass_lighter.php" class="button" id="continue_game_button">Pass the lighter!</button> 
-
-
+<form class="question_form" name="input" action="post_question.php" method="post">
+<textarea id="question_textarea" name="my_question" cols="55" rows="4">Enter your question:</textarea>
+</br>
+</br>
+<label for="receiver_name">Enter the name of a friend you want to pass the lighter to</label>
+</br>
+<input type="text" name="receiver" id="receiver_name" size="72" value="To:"/>
+</br>
+</br>
+<input type="submit" value="Pass the lighter" class="button" id="submit_question" />
+</form>
+</br>
 </body>
 </html>
