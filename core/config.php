@@ -9,7 +9,7 @@ $db = array('Type' =>'postgresql',
 			'Name' =>'pg',
 			'Port' =>'5432',
 			'Username' => 'postgres',
-			'Password' => 'bob12345'
+			'Password' => '12345'
 			);
 
 ?>
