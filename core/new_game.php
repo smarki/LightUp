@@ -12,8 +12,7 @@
 *Transactions can be accomplished using the following syntax: 
 * http://www.php.net/manual/en/function.pg-query.php
 */
-?>
-<?php
+
 if(!defined('RemoteAccess')){die('Direct access not premitted');}
 include '../core/connectors/database.php';
 
