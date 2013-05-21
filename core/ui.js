@@ -35,7 +35,7 @@ function NewGamePopup(){
 	questionInp.setAttribute('name', 'question');
 	questionInp.setAttribute('cols', 55);
 	questionInp.setAttribute('rows', 4);
-	var txt = document.createTextNode("Ask already something!");
+	var txt = document.createTextNode("Ask something already!");
 	questionInp.appendChild(txt);
 	
 	var receiverInp = document.createElement('input');
