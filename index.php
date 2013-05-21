@@ -11,6 +11,7 @@ include '/core/connectors/database.php';
 <title>The Lighter ver 0.001</title>
 <script language="javascript" src="js/jquery.js"></script>
 <script language="javascript" src="core/ui.js"></script>
+<script language="javascript" src="core/core.js"></script>
 <style>
 body {
 	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
@@ -71,8 +72,11 @@ textarea {
 	padding-top: 5px;
 }
 #newGameButton{
+	position: relative;
+	top:20px;
 	background:	#6d84b4;
 	width:80px;	
+	
 }
 .popupHeader {
 	background-color: #6d84b4;
@@ -114,6 +118,7 @@ textarea {
 	  <div id="logo"><img src="lighter.jpg" alt="Lighter logo" border="0" align="left" valign="bottom" height="70" width="300" /></div>
 	  <a id="newGameButton" class="button" >Start a new Game</a> </div>
 	</div>
+	<div id="mainFrameWrapper"></div>
 </div>
 </body>
 </html>

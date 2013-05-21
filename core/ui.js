@@ -5,7 +5,12 @@
  * 		2) Polu pio grigoro (http://stackoverflow.com/questions/268490/jquery-document-createelement-equivalent)
  * 
  */
-function NewGame(){
+
+function loadMenu(){
+
+	
+}
+function NewGamePopup(){
 	var newGame =  document.createElement('div');
 	newGame.className = 'popup';
 	newGame.id = 'newGameWizzard';
@@ -62,10 +67,11 @@ function NewGame(){
 		newGame.appendChild(popupHeader);
 		formArea.appendChild(questionInp);
 		formArea.appendChild(receiverInp);
-		newGame.appendChild(formArea);
+		form.appendChild(formArea);
 		popupButtonsWrapper.appendChild(submitButton);
 		popupButtonsWrapper.appendChild(cancelButton);
-		newGame.appendChild(popupButtonsWrapper);
+		form.appendChild(popupButtonsWrapper);
+		newGame.appendChild(form);
 		stage.appendChild(newGame);
 		$('#newGameWizzard').hide();
 		$('#newGameWizzard').fadeIn("slow");
@@ -78,9 +84,4 @@ function NewGame(){
 }
 
 
-$(document).ready(function() {
-	$('#newGameButton').click(NewGame);
-	var stage = document.getElementById('stage');
-
-	});
 	

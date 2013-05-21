@@ -4,9 +4,10 @@ include '/core/connectors/database.php';
 $dbconn = pg_connect("host=localhost port=5432 dbname=pg user=postgres password=alex");
 
 //q_text contains the question text
-$q_text = $_POST['question'];
+$q_text = pg_escape_string($_POST['question']);
+
 //the name of the friend
-$f_name = $_POST['friend'];
+$f_name = $_POST['receiver'];
 echo $q_text;
 
 // Prepare a query for execution
