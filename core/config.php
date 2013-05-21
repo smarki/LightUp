@@ -1,5 +1,5 @@
 <?php
-if(!defined('RemoteAccess')){die('Direct access not premitted');}
+//if(!defined('RemoteAccess')){die('Direct access not premitted');}
 /*
 * In future hopefully we will support more databases
 * $dbType = postgresql | mysql etc. 

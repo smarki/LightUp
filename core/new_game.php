@@ -1,4 +1,4 @@
-/*
+<?/*
  * Ti tha kanei auto to arxeio
  * 		- Pernei tin erwtisi kai to id tou paralipti
  *		- Ftiaxnei new game ston pinaka games, vazei erwtisi ston pinaka questions, susxetizei ton paikti me to game ston pinaka users_games
@@ -12,20 +12,27 @@
 *Transactions can be accomplished using the following syntax: 
 * http://www.php.net/manual/en/function.pg-query.php
 */
+?>
 <?php
 if(!defined('RemoteAccess')){die('Direct access not premitted');}
-include '/core/connectors/database.php';
+include '../core/connectors/database.php';
 
 pg_query($dbconn, "BEGIN WORK");
 
-$gm = pg_query($dbconn,"INSERT INTO games");
+$gm = pg_query($dbconn,"INSERT INTO games (last_question_id) VALUES ('-1000')");
 $game = pg_fetch_assoc($gm);
-$qs = pg_query($dbconn,"INSERT INTO question (question, user_id, second_player, game_id) VALUES ('".$question."','".$userId."','".$receiver."','".$game['id']."')");
-$ug = pg_query($dbconn,"INSERT INTO users_games (game_id, user_id) VALUES ('".$game['id']."','".$userId."')");
+$qs = pg_query($dbconn,"INSERT INTO questions (text, player_id, player2_id, game_id) VALUES ('".$question."','".$userId."','".$receiver."','".$game['id']."')");
+$question = pg_fetch_assoc($qs);
+$gm2 = pg_query($dbconn,"UPDATE games SET last_question_id='".$question['id']."' WHERE id='".$game['id']."'");
+$ug = pg_query($dbconn,"INSERT INTO games_users (game_id, user_id) VALUES ('".$game['id']."','".$userId."')");
 
-if(!$gm | !$gs | !$ug ){
+if(!$gm | !$gm2 | !$gs | !$ug ){
 	pg_query($dbconn, "ROLLBACK");
+	$result = array('RESULT'=>'ERROR','MESSAGE'=>'Something went wrong! Please try again!' );
+	echo json_encode($result);
 }else{
 	pg_query($dbconn, "COMMIT");
+	$result = array('RESULT'=>'SUCESS','MESSAGE'=>'Your game has been started!' );
+	echo json_encode($result);
 }
 ?>
