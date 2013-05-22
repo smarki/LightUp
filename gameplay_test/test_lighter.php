@@ -1,3 +1,8 @@
+<?php
+$dbconn = pg_connect("host=localhost port=5432 dbname=Lighter user=postgres password=root");
+?>
+<!DOCTYPE html>
+
 <html>
 <head>
 <title>Lighter app Version 0.0000000001</title>
@@ -77,7 +82,17 @@ $(document).ready(function() {
 </br></br>
 
 <div class="question">
-	Who of your friends is the sexiest?
+	<?php
+		$question_row = pg_query($dbconn, "SELECT text,player1_id FROM questions WHERE player2_id='3' AND game_id='1'");
+		if (!$question_row) {
+			echo "An error occurred.\n";
+			exit;
+		}
+		$question_row_array = pg_fetch_assoc($question_row);
+		echo $question_row_array['text'];
+		$photo_query=pg_query($dbconn, "SELECT photo FROM users WHERE id=".$question_row_array['player1_id']."");
+		$photo_array=pg_fetch_assoc($photo_query);
+	?>
 </div>
 
 </br>
@@ -85,7 +100,7 @@ $(document).ready(function() {
 <div class="main_container">
 	<img class="player_image" id="player1" src="images/unknown.jpg" alt="player1">
 	<img class="arrow" id="arrow1" src="images/QuestionMark.jpg" alt="question1">
-	<img class="player_image" id="player2" src="images/Alex.jpg" alt="player2">
+	<img class="player_image" id="player2" src="<?php echo $photo_array['photo']; ?>" alt="player2">
 	<img class="arrow" id="arrow2" src="images/arrow.jpg" alt="question2">
 	<img class="player_image" id="player3" src="images/Pantelis.jpg" alt="player3">	
 </div>

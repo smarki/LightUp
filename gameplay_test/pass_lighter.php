@@ -68,7 +68,7 @@
 </br></br>
 
 <div class="question">
-	Who of your friends is the sexiest?
+	Who is the sexiest?
 </div>
 
 </br>
