@@ -16,7 +16,7 @@
  * TODO: H logiki tou programmatos prepei na trexei se php ara provlimatizome kata poso tha prepei na dosoume dikeomata sto javascript
  */
 if(!defined('RemoteAccess')){die('Direct access not premitted');}
-include '../core/connectors/database.php';
+include 'core/connectors/database.php';
 
 $requestId= null;
 $gms = pg_query($dbconn,"SELECT (game_id) FROM games_users WHERE user_id='".$userId."'"); //Fetching games he belongs too

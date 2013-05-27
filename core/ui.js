@@ -1,8 +1,8 @@
 
 /* Setup gia ena aplo Popup 
- *  O logos pou pas me javascript kai oxi me jquery einai 
- * 		1) Einia pio kompso
- * 		2) Polu pio grigoro (http://stackoverflow.com/questions/268490/jquery-document-createelement-equivalent)
+ * O logos pou pas me javascript kai oxi me jquery einai 
+ * 1) Einia pio kompso
+ * 2) Polu pio grigoro (http://stackoverflow.com/questions/268490/jquery-document-createelement-equivalent)
  * 
  */
 
@@ -10,6 +10,7 @@ function loadMenu(){
 
 	
 }
+
 function NewGamePopup(){
 	var newGame =  document.createElement('div');
 	newGame.className = 'popup';
@@ -23,8 +24,9 @@ function NewGamePopup(){
 	
 	var form = document.createElement('form');
 	form.setAttribute('name', 'newGame');
-	form.setAttribute('action', 'get_question.php');
+	form.setAttribute('action', '/core/new_game.php');
 	form.setAttribute('method', 'post');
+	form.id = 'newGameForm';
 
 	var formArea = document.createElement('div');
 	formArea.id = 'formArea';
@@ -50,7 +52,7 @@ function NewGamePopup(){
 	popupButtonsWrapper.id = 'popupButtonsWrapper';
 	
 	var submitButton = document.createElement('input');
-	submitButton.id = 'acceptButton';
+	submitButton.id = 'createGameButton';
 	submitButton.className = 'button';
 	submitButton.setAttribute('type', 'submit');
 	submitButton.setAttribute('value', 'Start');
@@ -80,8 +82,51 @@ function NewGamePopup(){
 					$(this).remove();
 				});
 		});
+
+		$('#newGameForm').submit(function() {
+			event.preventDefault();
+			var url = $(this).attr('action');
+			$(this).fadeOut(500).remove();
+			$.post(url, $(this).serialize(),function(data){
+				
+				var result = data;
+
+				var div = document.getElementById('newGameWizzard');
+				errorMessage(result, div);
+				
+				
+				
+				
+			},'json');
+			
+		});
 	}
 }
 
+function errorMessage(data, div){
+
+	var errorDiv = document.createElement('div');
+	errorDiv.id = 'errorMessage';
+	div.appendChild(errorDiv);
+	var message = data.RESULT+'! '+data.MESSAGE;
+	$('#errorMessage').html(message);
+	if(data.RESULT == 'SUCCESS'){
+		errorDiv.className = 'errorSuccess';
+
+	}else{
+		errorDiv.className = 'errorFail';
+
+	}
+	
+} 
+
+function ListOfGames(){
+	var url = '/core/get_games.php';
+	$.post(url,data, function(data){
+		
+	});
+	
+	
+}
 
 	

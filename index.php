@@ -1,6 +1,10 @@
 <?php
+session_start();
 define('RemoteAccess',1);
-include '/core/connectors/database.php';
+set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__));
+$_SESSION['baseURI'] = __DIR__;
+echo $_SESSION['baseURI'] ;
+include ($_SESSION['baseURI'] .'/core/connectors/database.php');
 
 ?>
 
@@ -42,10 +46,11 @@ textarea {
 	resize: none;
 }
 .popup {
-	position: relative;
+	position: absolute;
 	margin-left: auto;
 	margin-right: auto;
 	top: 125px;
+	left: 33%;
 	width: 500px;
 	min-height: 150px;
 	border: 10px solid rgba(82, 82, 82, .7);
@@ -87,7 +92,7 @@ textarea {
 
 
 }
-#acceptButton{
+#createGameButton{
 	background:	#6d84b4;
 	width:80px;
 }
@@ -105,6 +110,23 @@ textarea {
 	padding:1em;
 	background:#FFF;	
 }
+#gameWrapper{
+	width: 900px;
+	margin-left:auto;
+	margin-right:auto;
+}	
+#mainFrameWrapper{
+ 	min-height: 200px;	
+}
+.errorSuccess{
+	background: rgba(154,205,50,.5);
+}
+.errorFail{
+	background: rgba(200,54,54,.5);
+}
+#errorMessage{
+	text-align: center;
+}
 </style>
 <script>
 
@@ -114,11 +136,13 @@ textarea {
 
 <body>
 <div id="stage">
+<div id="gameWrapper">
 	<div id="header">
 	  <div id="logo"><img src="lighter.jpg" alt="Lighter logo" border="0" align="left" valign="bottom" height="70" width="300" /></div>
 	  <a id="newGameButton" class="button" >Start a new Game</a> </div>
 	</div>
 	<div id="mainFrameWrapper"></div>
+    </div>
 </div>
 </body>
 </html>
