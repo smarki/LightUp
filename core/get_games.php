@@ -15,23 +15,28 @@
  * 
  * TODO: H logiki tou programmatos prepei na trexei se php ara provlimatizome kata poso tha prepei na dosoume dikeomata sto javascript
  */
-if(!defined('RemoteAccess')){die('Direct access not premitted');}
-include 'core/connectors/database.php';
+session_start();
+include ($_SESSION['baseURI'] .'/core/connectors/database.php');
 
+$userId = 1; //debuggin value needs to be taken from the session
 $requestId= null;
 $gms = pg_query($dbconn,"SELECT (game_id) FROM games_users WHERE user_id='".$userId."'"); //Fetching games he belongs too
 $i=0;
 //Running through all the results 
 while($game = pg_fetch_assoc($gms)){
 	$gm = pg_fetch_assoc(pg_query($dbconn,"SELECT * FROM games WHERE id='".$game['game_id']."'")); //Picking Up the Game's info.
-	$latestQs = pg_fetch_assoc(pg_query($dbconn, "SELECT * FROM questions WHERE id='".$gm['latest_question']."'")); //Picking up the latest question for print
+	$latestQs = pg_fetch_assoc(pg_query($dbconn, "SELECT * FROM questions WHERE id='".$gm['last_question_id']."'")); //Picking up the latest question for print
 	//Pack it beatifully in an array to pass it over to our good friend json
-	$games[i]['name'] = 'A Game'; //Needs to be changed to take the name of the player and append a "\'s Game" 
-	$games[i]['round'] = $gm['round'];
-	$game[i]['question'] = $latestQs['text'];
-	$game[i]['player1'] = $latestQs['player1_id'];
-	$game[i]['player2'] = $latestQs['player2_id'];
-	$game[i]['player3'] = $latestQs['player3_id'];  
+	//print_r($gm);
+	//print_r($latestQs);
+	$games[$i]['name'] = 'A Game'; //Needs to be changed to take the name of the player and append a "\'s Game" 
+	//$gm[$i]['round'] = $gm['round'];
+	$games[$i]['question'] = $latestQs['text'];
+	$games[$i]['player1'] = $latestQs['player1_id'];
+	$games[$i]['player2'] = $latestQs['player2_id'];
+	$games[$i]['player3'] = $latestQs['player3_id'];  
+	$i++;
 }
-echo json_encode($game);
+//print_r($games);
+echo '{"games":'.json_encode($games).'}';
 ?>

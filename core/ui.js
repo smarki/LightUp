@@ -60,6 +60,7 @@ function NewGamePopup(){
 	var cancelButton = document.createElement('a');
 	cancelButton.id = "closePopupButton";
 	cancelButton.className = "button";
+	cancelButton.href = "#";
 	txt = document.createTextNode("Cancel");
 	cancelButton.appendChild(txt);
 	
@@ -122,11 +123,16 @@ function errorMessage(data, div){
 
 function ListOfGames(){
 	var url = '/core/get_games.php';
-	$.post(url,data, function(data){
-		
+	$.getJSON(url, function(data){
+		CreateListOfGames(data);
 	});
-	
-	
 }
 
+function CreateListOfGames(data){
+	$.each(data.games, function(index, game){
+		var html = '<div class="activeGameWrapper"><div id="gameTitle">'+game.name+'</div><div id="gameQuestion">'+game.question+'</div> </div>'	
+		$(html).appendTo('#mainFrameWrapper').fadeIn('slow');
+		});
+	
+}
 	
