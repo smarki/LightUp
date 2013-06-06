@@ -104,7 +104,7 @@ include ($_SESSION['baseURI'] . '/core/connectors/database.php');
 				background: #FFF;
 			}
 			#gameWrapper {
-				width: 900px;
+				width: 735px;
 				margin-left: auto;
 				margin-right: auto;
 			}
@@ -122,6 +122,20 @@ include ($_SESSION['baseURI'] . '/core/connectors/database.php');
 			}
 			#header{
 				height:150px;
+			}
+			.activeGameWrapper{
+				display:none;
+				height: 100px;
+				background:url(core/template/img/question_back.gif)	;
+				background-repeat: no-repeat;
+				margin-bottom:10px;
+			}
+			#activeGameInfoWrapper{
+				width: 715px;
+				margin-left: auto;
+				margin-right: auto;
+				height:90px;
+				padding-top: 2px;
 			}
 		</style>
 		<script></script>

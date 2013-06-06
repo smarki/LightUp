@@ -126,12 +126,18 @@ function ListOfGames(){
 	$.getJSON(url, function(data){
 		CreateListOfGames(data);
 	});
+	setInterval(function(){
+		$.getJSON(url, function(data){
+		CreateListOfGames(data);
+		});
+	},1000*60*5);
 }
 
 function CreateListOfGames(data){
+	$('.activeGameWrapper').remove();
 	$.each(data.games, function(index, game){
-		var html = '<div class="activeGameWrapper"><div id="gameTitle">'+game.name+'</div><div id="gameQuestion">'+game.question+'</div> </div>'	
-		$(html).appendTo('#mainFrameWrapper').fadeIn('slow');
+		var html = '<div class="activeGameWrapper"><div id="activeGameInfoWrapper"><div id="gameTitle"><h2>'+game.name+'</h2></div><div id="gameQuestion">'+game.question+'</div></div></div>'	
+		$(html).appendTo('#mainFrameWrapper').delay(200*index).fadeIn('slow');
 		});
 	
 }
